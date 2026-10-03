@@ -1,15 +1,16 @@
 # AI_digit_classifier
 
-Handwritten Digit Recognition CNN
+# Handwritten Digit Recognition CNN
 
 A Convolutional Neural Network (CNN) project for recognizing handwritten digits from images using TensorFlow and Keras.
 
-Project Overview
+## Project Overview
 
 This project started with the MNIST handwritten digit dataset to understand the fundamentals of Convolutional Neural Networks.
 
 The project is now being extended toward recognizing real-world handwritten digits, where images can have different handwriting styles, sizes, positions, lighting conditions, backgrounds, and noise.
 
+```text
 Handwritten Image
        ↓
 Preprocessing
@@ -27,8 +28,8 @@ CNN
 Prediction
        ↓
 0 - 9
-
-Technologies
+```
+## Technologies
 
 - Python
 - TensorFlow
@@ -37,7 +38,7 @@ Technologies
 - Pillow
 - Matplotlib
 
-Dataset
+## Dataset
 
 The initial model uses the MNIST handwritten digit dataset.
 
@@ -65,10 +66,11 @@ using:
 
 x = x / 255.0
 
-CNN Architecture
+## CNN Architecture
 
 The first version of the model uses the following architecture:
 
+```text
 28 × 28 × 1
      ↓
 Conv2D
@@ -106,9 +108,10 @@ Dense
 Softmax
      ↓
 0 - 9
+```
+## Model
 
-Model
-
+```code
 inputs = tf.keras.Input(shape=(28, 28, 1))
 
 x = tf.keras.layers.Conv2D(
@@ -151,14 +154,14 @@ model = tf.keras.Model(
     inputs=inputs,
     outputs=outputs
 )
-
-Parameters
+```
+## Parameters
 
 The first CNN contains approximately:
 
 103,018 trainable parameters
 
-Training
+## Training
 
 The model uses:
 
@@ -167,6 +170,7 @@ The model uses:
 - Sparse categorical cross-entropy
 - Sparse categorical accuracy
 
+```code
 model.compile(
     optimizer=tf.keras.optimizers.Adam(
         learning_rate=0.001
@@ -176,15 +180,16 @@ model.compile(
         tf.keras.metrics.SparseCategoricalAccuracy()
     ]
 )
+```
 
-Prediction
+## Prediction
 
 The trained model produces 10 probabilities:
-
+```
 [ P(0), P(1), P(2), ..., P(9) ]
-
+```
 The predicted digit is the class with the highest probability.
-
+```code
 prediction = model.predict(x)
 
 digit = np.argmax(prediction[0])
@@ -192,8 +197,8 @@ confidence = prediction[0][digit]
 
 print("Predicted:", digit)
 print("Confidence:", confidence)
-
-Real-World Handwriting
+```
+## Real-World Handwriting
 
 MNIST images are highly standardized.
 
@@ -201,8 +206,8 @@ Real photographs are not.
 
 For example:
 
-MNIST
-
+## MNIST
+```
 Black background
       +
 White digit
@@ -210,9 +215,9 @@ White digit
 Centered
       +
 28 × 28
-
+```
 A real photograph can contain:
-
+```
 Paper
    +
 Shadows
@@ -226,13 +231,14 @@ Different digit size
 Different position
    +
 Different handwriting
+```
 
 Therefore, an image preprocessing pipeline is required.
 
 Real Image Preprocessing
 
 The current preprocessing pipeline is:
-
+```
 Original Image
       ↓
 Grayscale
@@ -256,7 +262,7 @@ Center Digit
 Normalize
       ↓
 CNN Input
-
+```
 The final CNN input has the shape:
 
 (1, 28, 28, 1)
@@ -283,10 +289,11 @@ Real-world images can differ in:
 
 The project therefore aims to move beyond MNIST toward more diverse handwriting data.
 
-Planned CNN V2
+## Planned CNN V2
 
 The next architecture will be deeper:
 
+```text
 28 × 28 × 1
      ↓
 Conv2D(32)
@@ -330,8 +337,9 @@ Dropout
 Dense(10)
      ↓
 Softmax
+```
 
-Data Augmentation
+## Data Augmentation
 
 To improve robustness, the project will experiment with transformations such as:
 
@@ -345,7 +353,7 @@ To improve robustness, the project will experiment with transformations such as:
 
 The goal is to expose the CNN to handwriting that is different from the original training examples.
 
-Project Roadmap
+## Project Roadmap
 
 V1 — Basic CNN
 
@@ -387,11 +395,11 @@ V5 — Complete System
 - [ ] Web/API deployment
 - [ ] Mobile deployment
 
-What I Am Learning
+## What Are You Learning
 
 This project is also being used to understand the mathematics and internal operation of CNNs.
 
-Topics include:
+## Topics include:
 
 - Image tensors
 - Channels
@@ -416,7 +424,7 @@ Topics include:
 - Generalization
 - Distribution shift
 
-Core Idea
+## Core Idea
 
 A major lesson from this project is:
 
@@ -431,7 +439,7 @@ Two images can both be:
 but still look very different to a neural network because their pixel distributions and visual characteristics are different.
 
 Project Structure
-
+```
 handwritten-digit-cnn/
 │
 ├── README.md
@@ -445,30 +453,37 @@ handwritten-digit-cnn/
 ├── data/
 │
 └── requirements.txt
+```
 
-Installation
+## Installation
 
-Install the required packages:
+### Install the required packages:
 
+```code
 pip install tensorflow numpy pillow matplotlib
+```
 
 Running the Project
 
-Train the model:
+## Train the model:
 
+```code
 python train.py
+ ```
 
-Run prediction:
+## Run prediction:
 
+```code
 python predict.py
+```
 
-Future Goal
+## Future Goal
 
 The long-term goal is to transform this basic MNIST CNN into a robust handwritten digit recognition system capable of handling real-world images rather than only standardized datasets.
 
 ---
 
-Author
+# Author
 
 Devabratta Yumnam
 
